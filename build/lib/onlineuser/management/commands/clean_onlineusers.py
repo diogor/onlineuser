@@ -5,7 +5,7 @@ from django.conf import settings
 
 from onlineuser.models import Online
 
-last_online_duration = getattr(settings, 'LAST_ONLINE_DURATION', 60)
+last_online_duration = getattr(settings, 'LAST_ONLINE_DURATION', 900)
 
 class Command(BaseCommand):
     help = "clean unused online user data"
