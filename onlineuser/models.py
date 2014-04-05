@@ -18,7 +18,7 @@ class OnlineManager(models.Manager):
         return self.onlines().filter(user__isnull=False)
 
 class Online(models.Model):
-    user = models.OneToOneField(User, related_name='online', blank=True, null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='online', blank=True, null=True)
     ident = models.CharField(max_length=200, unique=True)#username id for user / ip for guest
     session_key = models.CharField(max_length=64)
     updated_on = models.DateTimeField(auto_now=True)
