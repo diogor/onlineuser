@@ -18,9 +18,6 @@ onlineuser/management/__init__.py
 onlineuser/management/commands/__init__.py
 onlineuser/management/commands/clean_onlineusers.py
 onlineuser/management/commands/remove_all_onlineusers.py
-onlineuser/migrations/0001_initial.py
-onlineuser/migrations/0002_auto__add_unique_online_ident.py
-onlineuser/migrations/__init__.py
 onlineuser/templates/onlineuser/dummy.html
 onlineuser/templates/onlineuser/onlineinfos.html
 onlineuser/templatetags/__init__.py
