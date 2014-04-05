@@ -1,6 +1,5 @@
 LICENSE
 MANIFEST.in
-README
 setup.py
 django_onlineuser.egg-info/PKG-INFO
 django_onlineuser.egg-info/SOURCES.txt

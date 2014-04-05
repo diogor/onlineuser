@@ -48,12 +48,16 @@ class Online(models.Model):
             self.ident = '%s %s' % (self.user.username, self.user.pk)
         super(Online, self).save(*args, **kwargs)
 
-def getOnlineInfos(detail=False):
+def getOnlineInfos(detail=False, json=False):
     total_onlines = Online.objects.onlines().count()
     total_onlines_user = Online.objects.online_users().count()
     total_onlines_guest = total_onlines - total_onlines_user
-    ctx = {'total_onlines': total_onlines, 'total_onlines_user': total_onlines_user, \
-            'total_onlines_guest': total_onlines_guest}
+    ctx = {'total_onlines': total_onlines, 'total_onlines_user': total_onlines_user, 'total_onlines_guest': total_onlines_guest}
     if detail:
-        ctx['online_users'] = Online.objects.online_users()
+        if json:
+            ctx['online_users'] = []
+            for u in Online.objects.online_users():
+               ctx['online_users'].append(u.user.username)
+        else:
+            ctx['online_users'] = Online.objects.online_users()
     return ctx
