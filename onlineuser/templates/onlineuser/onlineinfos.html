@@ -1,7 +1,11 @@
 {% load i18n %}
-<h3 class="hn">
-    <span>{% trans "Currently online" %} <strong> {{ total_onlines }} </strong> ( <strong> {{ total_onlines_guest }} </strong> {% trans "guests" %}, <strong>{{ total_onlines_user }}</strong> {% trans "registered user" %} )</span>
-</h3>
-<p>
-    {% for o in online_users %} {{o.username}} {% endfor %}
-</p>
+<ul class="online-users-count">
+    <li>{% trans "Currently online: " %} <b>{{ total_onlines }}</b></li>
+    <li>{% trans "Guests: " %} <b>{{ total_onlines_guest }}</b></li>
+    <li>{% trans "Registered users: " %} <b>{{ total_onlines_user }}</b></li>
+</ul>
+<ul class="online-users-list">
+{% for o in online_users %}
+    <li>{{o.username}}</li>
+{% endfor %}
+</ul>
