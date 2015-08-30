@@ -49,6 +49,9 @@ class Online(models.Model):
             self.ident = '%s %s' % (self.user.username, self.user.pk)
         super(Online, self).save(*args, **kwargs)
 
+    class Meta:
+        app_label = 'onlineuser'
+
 def getOnlineInfos(detail=False):
     total_onlines = Online.objects.onlines().count()
     total_onlines_user = Online.objects.online_users().count()
