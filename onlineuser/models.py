@@ -8,6 +8,7 @@ from django.utils import timezone
 try:
     AUTH_USER_MODEL = settings.AUTH_USER_MODEL
 except:
+    from django.contrib.auth.models import User
     AUTH_USER_MODEL = User
 
 last_online_duration = getattr(settings, 'LAST_ONLINE_DURATION', 900)
@@ -51,6 +52,9 @@ class Online(models.Model):
         if self.user:
             self.ident = '%s %s' % (self.user.username, self.user.pk)
         super(Online, self).save(*args, **kwargs)
+
+    class Meta:
+        app_label = 'onlineuser'
 
 def getOnlineInfos(detail=False, json=False):
     total_onlines = Online.objects.onlines().count()
