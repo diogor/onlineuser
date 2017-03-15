@@ -4,7 +4,13 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
-last_online_duration = getattr(settings, 'LAST_ONLINE_DURATION', 60)
+
+try:
+    AUTH_USER_MODEL = settings.AUTH_USER_MODEL
+except:
+    AUTH_USER_MODEL = User
+
+last_online_duration = getattr(settings, 'LAST_ONLINE_DURATION', 900)
 
 class OnlineManager(models.Manager):
     def onlines(self):
@@ -15,7 +21,7 @@ class OnlineManager(models.Manager):
         return self.onlines().filter(user__isnull=False)
 
 class Online(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='online', blank=True, null=True)
+    user = models.OneToOneField(AUTH_USER_MODEL, related_name='online', blank=True, null=True)
     ident = models.CharField(max_length=200, unique=True)#username id for user / ip for guest
     session_key = models.CharField(max_length=64)
     updated_on = models.DateTimeField(auto_now=True)
