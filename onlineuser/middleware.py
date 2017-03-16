@@ -1,6 +1,12 @@
+from django import VERSION
 from onlineuser.models import Online
 
-class OnlineUserMiddleware:
+if VERSION >= (1, 10):
+    from django.utils.deprecation import MiddlewareMixin
+else:
+    MiddlewareMixin = object
+
+class OnlineUserMiddleware(MiddlewareMixin):
     def process_request(self, request):
         user = request.user
         ip=request.META['REMOTE_ADDR']
